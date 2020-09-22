@@ -1,0 +1,73 @@
+.root {
+  align-items: center;
+  background-color: #E5CCB8;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.root > section {
+  background-color: #fcfbfa;
+  border-radius: 1rem;
+  flex: 1;
+  margin: 0 2rem;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.root > section > ul {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 1rem;
+  overflow-x: auto;
+}
+
+.root > section > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.root > section > ul > li {
+  display: block;
+  position: relative;
+  width: 10rem;
+}
+
+.root > section > ul > li > span:first-child {
+  border-radius: 0.5rem;
+  display: block;
+  height: 10rem;
+  width: 10rem;
+}
+
+.root > section > ul > li > span:last-child {
+  border-radius: 0.25rem;
+  display: block;
+  height: 1rem;
+  margin-top: 0.25rem;
+  width: 8rem;
+}
+
+.root > section > ul > li > small {
+  left: 1rem;
+  position: absolute;
+  top: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.25rem;
+  background-color: #fcfbfa;
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+.root > section > ul > li > img {
+  border-radius: 0.5rem;
+  display: block;
+  width: 100%;
+}
+
+.root > section > ul > li > h4,
+.root > section > ul > li > p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
