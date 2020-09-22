@@ -3,10 +3,12 @@ import { FETCHED, LOADING } from './constants';
 const initialState = {
   isLoading: {
     artists: true,
+    profile: true,
     tracks: true,
   },
   data: {
     artists: [],
+    profile: {},
     tracks: [],
   },
 };
