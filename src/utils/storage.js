@@ -17,7 +17,8 @@ export function clearStorages() {
 }
 
 export function setExpireTime(value) {
-  localStorage.setItem(EXPIRE_TIME_STORAGE, value * 1000);
+  const time = new Date().getTime();
+  localStorage.setItem(EXPIRE_TIME_STORAGE, time + (value * 1000));
 }
 
 export function checkExpireTime() {

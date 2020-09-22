@@ -1,0 +1,18 @@
+.root {
+  align-items: center;
+  background: radial-gradient(#a7bfe8, #6190e8);
+  flex-direction: column;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.root > a {
+  background-color: #1DB954;
+  border: none;
+  border-radius: 5rem;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 1rem 5rem;
+}
