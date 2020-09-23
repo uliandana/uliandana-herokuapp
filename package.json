@@ -12,6 +12,7 @@
     "build:production": "npm run build -- --production",
     "build:staging": "npm run build -- --staging",
     "dev": "concurrently -k -r \"npm:open:src\" \"npm:lint:watch\"",
+    "heroku-postbuild": "npm run build -- --production",
     "lint": "esw src --color --ignore-pattern src/assets",
     "lint:watch": "npm run lint -- --watch",
     "open:src": "babel-node tools/srcServer.js",
