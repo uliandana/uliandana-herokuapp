@@ -1,14 +1,14 @@
 import { getMe, getPersonalization } from '../../services';
 import { FETCHED, LOADING } from './constants';
 
-export function fetchData(type) {
+export function fetchData(type, term) {
   const key = type;
   const isProfile = type === 'profile';
   return async dispatch => {
     dispatch(loadingAction(true, key));
     try {
       const query = [
-        '?time_range=short_term',
+        `?time_range=${term}`,
       ];
       const api = isProfile ? () => getMe() : () => getPersonalization(type, query.join('&'));
       const data = await api();
