@@ -5,7 +5,7 @@ import path from 'path';
 import { chalkProcessing } from './chalkConfig';
 
 const app = express();
-const port = 4000;
+const port = 80;
 
 app.use(gzipStatic('dist'));
 app.use(historyApiFallback());
