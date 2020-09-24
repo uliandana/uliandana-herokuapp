@@ -74,9 +74,8 @@ export function Profile() {
 
 export function Artists() {
   const { term } = useContext(Context);
-  const { data, isLoading, isMounting } = useSelector(s => s.main);
-  const [flash] = useFlash(isLoading);
-  const { artists } = data;
+  const { data, isMounting } = useSelector(s => s.main);
+  const items = useFlash(data.artists);
 
   const setContent = v => {
     if (isMounting.artists) {
@@ -87,14 +86,14 @@ export function Artists() {
         </li>
       ));
     }
-    return flash ? '' : v;
+    return v;
   };
 
   return (
     <section className={styles.artists}>
       <h3>Your top artists {term}</h3>
       <ul>
-        {setContent(artists.map((i, idx) => (
+        {setContent(items.map((i, idx) => (
           <li key={idx}>
             <small>{idx + 1}</small>
             <figure style={{ backgroundImage: `url(${i.images[1].url})` }} />
@@ -108,9 +107,8 @@ export function Artists() {
 
 export function Tracks() {
   const { term } = useContext(Context);
-  const { data, isLoading, isMounting } = useSelector(s => s.main);
-  const [flash] = useFlash(isLoading);
-  const { tracks } = data;
+  const { data, isMounting } = useSelector(s => s.main);
+  const items = useFlash(data.tracks);
 
   const setContent = v => {
     if (isMounting.tracks) {
@@ -121,14 +119,14 @@ export function Tracks() {
         </li>
       ));
     }
-    return flash ? '' : v;
+    return v;
   };
 
   return (
     <section className={styles.tracks}>
       <h3>Your top tracks {term}</h3>
       <ul>
-        {setContent(tracks.map((i, idx) => (
+        {setContent(items.map((i, idx) => (
           <li key={idx}>
             <small>{idx + 1}</small>
             <figure style={{ backgroundImage: `url(${i.album.images[1].url})` }} />
@@ -183,14 +181,16 @@ export function Progress() {
   );
 }
 
-export function useFlash(isLoading) {
-  const [flash, setFlash] = useState(false);
-  const [prev, setPrev] = useState(isLoading);
+export function useFlash(data) {
+  const [items, setItems] = useState(data);
 
   useEffect(() => {
-    setPrev(isLoading);
-    (prev && !isLoading) && setFlash(true);
-    (flash) && setFlash(false);
-  }, [isLoading, flash]);
-  return [flash];
+    setItems([]);
+  }, [data]);
+
+  useEffect(() => {
+    (!items.length && data.length) && setItems(data);
+  }, [items]);
+
+  return items;
 }

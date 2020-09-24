@@ -36,7 +36,7 @@
   background-color: rgba(126, 106, 128, 0.5);
   height: 0.5rem;
   left: 0;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100vw;
 }
@@ -157,6 +157,7 @@
 }
 
 .root > section > ul > li > figure {
+  background-color: rgba(126, 106, 128, 0.5);
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -216,6 +217,21 @@
     font-size: 1rem;
   }
 
+  .root > section > ul > li {
+    width: 8rem;
+  }
+
+  .root > section > ul > li > figure {
+    height: 8rem;
+    width: 8rem;
+  }
+
+  .root > section > ul > li > h4 {
+    font-size: 0.9rem;
+  }
+  .root > section > ul > li > p {
+    font-size: 0.75rem;
+  }
   .profile {
     display: block;
     grid-column: 1;

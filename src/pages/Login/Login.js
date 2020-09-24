@@ -10,8 +10,15 @@ export default function Login() {
   ].join('&');
   return (
     <main className={styles.root}>
-      <h1>Login</h1>
-      <a href={`https://accounts.spotify.com/authorize${query}`}>Login with spotify</a>
+      <section>
+        <div>
+          <figure style={{ backgroundImage: 'url(/assets/banner-1.jpeg)' }} />
+          <figure style={{ backgroundImage: 'url(/assets/banner-2.jpeg)' }} />
+          <figure style={{ backgroundImage: 'url(/assets/banner-3.jpeg)' }} />
+        </div>
+        <h1>Enter</h1>
+        <a href={`https://accounts.spotify.com/authorize${query}`}>Login with spotify</a>
+      </section>
     </main>
   );
 }
