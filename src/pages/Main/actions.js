@@ -1,11 +1,13 @@
 import { getMe, getPersonalization } from '../../services';
-import { FETCHED, LOADING } from './constants';
+import { FETCHED, LOADING, MOUNTING } from './constants';
 
-export function fetchData(type, term) {
+export function fetchData(type, term, hasMounted) {
   const key = type;
   const isProfile = type === 'profile';
+  const loadAction = hasMounted ? loadingAction : mountingAction;
+
   return async dispatch => {
-    dispatch(loadingAction(true, key));
+    dispatch(loadAction(true, key));
     try {
       const query = [
         `?time_range=${term}`,
@@ -14,7 +16,7 @@ export function fetchData(type, term) {
       const data = await api();
       dispatch(fetchedAction(isProfile ? data : data.items, key));
     } catch (err) {
-      dispatch(loadingAction(false, key));
+      dispatch(loadAction(false, key));
     }
   };
 }
@@ -23,6 +25,10 @@ function fetchedAction(data, key) {
   return { type: FETCHED, data, key };
 }
 
-function loadingAction(isLoading, key) {
-  return { type: LOADING, isLoading, key };
+function loadingAction(isLoading) {
+  return { type: LOADING, isLoading };
+}
+
+function mountingAction(isMounting, key) {
+  return { type: MOUNTING, isMounting, key };
 }

@@ -32,11 +32,27 @@
   margin: 0 1rem;
 }
 
+.root + div {
+  background-color: rgba(126, 106, 128, 0.5);
+  height: 0.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}
+
+.root + div > span {
+  background-color: #7e6a80;
+  border-radius: 0 0.25rem 0.25rem 0;
+  display: block;
+  height: inherit;
+}
+
 .root {
   display: grid;
   grid-template-columns: 40vw 1fr;
   grid-template-rows: auto auto auto;
-  padding: 2rem;
+  padding: 2rem 2rem 4rem;
 }
 
 .root > header {
@@ -55,6 +71,11 @@
   font-size: 1rem;
   padding: 0.5rem 1rem;
   transition: all 0.15s ease-in-out;
+}
+
+.root > header > nav > button:disabled {
+  background-color: #7e6a80;
+  color: #fcfbfa;
 }
 
 .root > header > nav > button:hover {
@@ -95,9 +116,17 @@
 }
 
 .root > section > ul > li {
+  animation: fade-in 1s ease-in-out 0.25s;
+  animation-fill-mode: forwards;
   display: block;
+  opacity: 0;
   position: relative;
   width: 10rem;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .root > section > ul > li > span:first-child {
@@ -116,9 +145,9 @@
 }
 
 .root > section > ul > li > small {
-  left: 1rem;
+  left: 0.5rem;
   position: absolute;
-  top: 1rem;
+  top: 0.5rem;
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.25rem;
@@ -127,10 +156,15 @@
   line-height: 1.5rem;
 }
 
-.root > section > ul > li > img {
+.root > section > ul > li > figure {
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 0.5rem;
   display: block;
-  width: 100%;
+  height: 10rem;
+  margin-bottom: 0.5rem;
+  width: 10rem;
 }
 
 .root > section > ul > li > h4,
@@ -157,7 +191,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
     height: auto;
-    padding: 1rem;
+    padding: 1rem 1rem 2rem;
     min-height: 100vh;
   }
 
@@ -190,7 +224,9 @@
   }
 
   .profile > figure {
+    height: 10rem;
     margin-bottom: 1rem;
+    width: 10rem;
   }
 
   .artists {

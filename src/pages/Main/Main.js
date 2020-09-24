@@ -9,7 +9,7 @@ const Context = createContext({});
 export default function Main() {
   const dispatch = useDispatch();
   const [term, setTerm] = useState('short_term');
-  const { data, isLoading } = useSelector(s => s.main);
+  const { data, isMounting } = useSelector(s => s.main);
   const { profile } = data;
 
   useEffect(() => {
@@ -19,11 +19,11 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchData('artists', term));
-    dispatch(fetchData('tracks', term));
+    dispatch(fetchData('artists', term, true));
+    dispatch(fetchData('tracks', term, true));
   }, [term]);
 
-  if (isLoading.profile) {
+  if (isMounting.profile) {
     return (
       <main className={styles.spinner}>
         <Spinner size="10rem" />
@@ -48,7 +48,7 @@ export default function Main() {
           <h1>Welcome, {profile?.display_name}!</h1>
           <nav>
             {btns.map(i => (
-              <button key={i.term} onClick={() => setTerm(i.term)}>{i.text}</button>
+              <button disabled={i.term === term} key={i.term} onClick={() => setTerm(i.term)}>{i.text}</button>
             ))}
           </nav>
         </header>
@@ -56,6 +56,7 @@ export default function Main() {
         <Artists />
         <Tracks />
       </main>
+      <Progress />
     </Context.Provider>
   );
 }
@@ -73,17 +74,20 @@ export function Profile() {
 
 export function Artists() {
   const { term } = useContext(Context);
-  const { data, isLoading } = useSelector(s => s.main);
+  const { data, isLoading, isMounting } = useSelector(s => s.main);
+  const [flash] = useFlash(isLoading);
   const { artists } = data;
 
   const setContent = v => {
-    const loading = [...Array.from({ length: 3 }).keys()].map(i => (
-      <li key={i}>
-        <span className="loading" />
-        <span className="loading" />
-      </li>
-    ));
-    return isLoading.artists ? loading : v;
+    if (isMounting.artists) {
+      return [...Array.from({ length: 3 }).keys()].map(i => (
+        <li key={i}>
+          <span className="loading" />
+          <span className="loading" />
+        </li>
+      ));
+    }
+    return flash ? '' : v;
   };
 
   return (
@@ -93,7 +97,7 @@ export function Artists() {
         {setContent(artists.map((i, idx) => (
           <li key={idx}>
             <small>{idx + 1}</small>
-            <img alt={i.name} src={i.images[1].url} />
+            <figure style={{ backgroundImage: `url(${i.images[1].url})` }} />
             <h4>{i.name}</h4>
           </li>
         )))}
@@ -104,17 +108,20 @@ export function Artists() {
 
 export function Tracks() {
   const { term } = useContext(Context);
-  const { data, isLoading } = useSelector(s => s.main);
+  const { data, isLoading, isMounting } = useSelector(s => s.main);
+  const [flash] = useFlash(isLoading);
   const { tracks } = data;
 
   const setContent = v => {
-    const loading = [...Array.from({ length: 3 }).keys()].map(i => (
-      <li key={i}>
-        <span className="loading" />
-        <span className="loading" />
-      </li>
-    ));
-    return isLoading.tracks ? loading : v;
+    if (isMounting.tracks) {
+      return [...Array.from({ length: 3 }).keys()].map(i => (
+        <li key={i}>
+          <span className="loading" />
+          <span className="loading" />
+        </li>
+      ));
+    }
+    return flash ? '' : v;
   };
 
   return (
@@ -124,7 +131,7 @@ export function Tracks() {
         {setContent(tracks.map((i, idx) => (
           <li key={idx}>
             <small>{idx + 1}</small>
-            <img alt={i.album.name} src={i.album.images[1].url} />
+            <figure style={{ backgroundImage: `url(${i.album.images[1].url})` }} />
             <h4>{i.name}</h4>
             <p>{i.artists[0].name}</p>
           </li>
@@ -132,4 +139,58 @@ export function Tracks() {
       </ul>
     </section>
   );
+}
+
+export function Progress() {
+  const { isLoading } = useSelector(s => s.main);
+  const [loader, setLoader] = useState({ display: 'none', width: 0 });
+
+  useEffect(() => {
+    const { display, width } = loader;
+    if (!isLoading && (width === '100vw')) {
+      setTimeout(() => {
+        setLoader({
+          display: 'none',
+          width: 0,
+        });
+      }, 1100);
+    } else if (isLoading && (width === 0)) {
+      if (display === 'none') {
+        setLoader({
+          ...loader,
+          display: 'block',
+        });
+      } else {
+        setLoader({
+          ...loader,
+          transition: 'width 2s ease-in-out',
+          width: '75vw',
+        });
+      }
+    } else if (!isLoading && (width === '75vw')) {
+      setLoader({
+        display: 'block',
+        transition: 'width 1s ease-in-out',
+        width: '100vw',
+      });
+    }
+  }, [isLoading, loader]);
+
+  return (
+    <div style={{ display: loader.display }}>
+      <span style={{ transition: loader.transition, width: loader.width }} />
+    </div>
+  );
+}
+
+export function useFlash(isLoading) {
+  const [flash, setFlash] = useState(false);
+  const [prev, setPrev] = useState(isLoading);
+
+  useEffect(() => {
+    setPrev(isLoading);
+    (prev && !isLoading) && setFlash(true);
+    (flash) && setFlash(false);
+  }, [isLoading, flash]);
+  return [flash];
 }
