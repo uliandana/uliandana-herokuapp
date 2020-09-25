@@ -49,7 +49,7 @@ const App = ({ history, store }) => {
         <ErrorBoundary>
           <ContextProvider>
             <Switch>
-              <Route component={pages.Main} exact path="/main" />
+              <Route component={pages.Main} exact path={['/main', '/main/:page']} />
               <Route component={pages.Login} exact path="/" />
               <Route component={pages.Error404} />
             </Switch>

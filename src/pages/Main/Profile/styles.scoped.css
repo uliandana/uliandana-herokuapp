@@ -1,0 +1,46 @@
+.root {
+  background-color: #fcfbfa;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 15rem 1fr;
+  margin-right: 2rem;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.root > figure {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  grid-row: 1/3;
+  margin: auto;
+  height: 15rem;
+  width: 15rem;
+}
+
+.root > h4 {
+  font-size: 1.5rem;
+  margin: auto 1rem 0;
+}
+
+.root > p {
+  font-size: 1rem;
+  margin: 0 1rem;
+}
+
+@media only screen and (max-width: 48em) {
+  .root {
+    display: block;
+    grid-column: 1;
+    grid-row: 2;
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+  .root > figure {
+    height: 10rem;
+    margin-bottom: 1rem;
+    width: 10rem;
+  }
+}
