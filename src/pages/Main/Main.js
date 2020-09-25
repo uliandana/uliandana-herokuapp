@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ProgressLoading from '../../components/elements/ProgressLoading';
 import Spinner from '../../components/elements/Spinner';
 import Artists from './Artists';
 import Profile from './Profile';
@@ -12,7 +13,7 @@ export const Context = createContext({});
 export default function Main() {
   const dispatch = useDispatch();
   const [term, setTerm] = useState('short_term');
-  const { data, isMounting } = useSelector(s => s.main);
+  const { data, isLoading, isMounting } = useSelector(s => s.main);
   const { profile } = data;
 
   useEffect(() => {
@@ -59,49 +60,7 @@ export default function Main() {
         <Artists />
         <Tracks />
       </main>
-      <Progress />
+      <ProgressLoading isLoading={isLoading} />
     </Context.Provider>
-  );
-}
-
-export function Progress() {
-  const { isLoading } = useSelector(s => s.main);
-  const [loader, setLoader] = useState({ display: 'none', width: 0 });
-
-  useEffect(() => {
-    const { display, width } = loader;
-    if (!isLoading && (width === '100vw')) {
-      setTimeout(() => {
-        setLoader({
-          display: 'none',
-          width: 0,
-        });
-      }, 1100);
-    } else if (isLoading && (width === 0)) {
-      if (display === 'none') {
-        setLoader({
-          ...loader,
-          display: 'block',
-        });
-      } else {
-        setLoader({
-          ...loader,
-          transition: 'width 2s ease-in-out',
-          width: '75vw',
-        });
-      }
-    } else if (!isLoading && (width === '75vw')) {
-      setLoader({
-        display: 'block',
-        transition: 'width 1s ease-in-out',
-        width: '100vw',
-      });
-    }
-  }, [isLoading, loader]);
-
-  return (
-    <div style={{ display: loader.display }}>
-      <span style={{ transition: loader.transition, width: loader.width }} />
-    </div>
   );
 }

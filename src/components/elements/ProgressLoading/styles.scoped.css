@@ -1,0 +1,21 @@
+.root {
+  background-color: rgba(126, 106, 128, 0.5);
+  height: 0.5rem;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.root > span {
+  background-color: #7e6a80;
+  border-radius: 0 0.25rem 0.25rem 0;
+  display: block;
+  height: inherit;
+}
+
+@media only screen and (max-width: 48em) {
+  .root {
+    height: 0.3rem;
+  }  
+}

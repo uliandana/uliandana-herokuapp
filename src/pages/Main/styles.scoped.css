@@ -3,22 +3,6 @@
   height: 100vh;
 }
 
-.root + div {
-  background-color: rgba(126, 106, 128, 0.5);
-  height: 0.5rem;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100vw;
-}
-
-.root + div > span {
-  background-color: #7e6a80;
-  border-radius: 0 0.25rem 0.25rem 0;
-  display: block;
-  height: inherit;
-}
-
 .root {
   display: grid;
   grid-template-columns: 40vw 1fr;
