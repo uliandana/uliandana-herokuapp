@@ -35,7 +35,7 @@ export default function Artists() {
       <header>
         <h3>Your top artists {txtTerm}</h3>
         {isArtistsPage
-          ? <Link onClick={goBack} to="#">&times;</Link>
+          ? <button onClick={goBack}>&times;</button>
           : <Link to="/main/artists">More &rarr;</Link>}
       </header>
       <ul>

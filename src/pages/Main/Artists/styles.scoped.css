@@ -11,14 +11,25 @@
   margin-bottom: 1rem;
 }
 
-.root > header > a {
+.root > header > a,
+.root > header > button {
   color: #7e6a80;
   display: block;
   transition: all 0.15s ease-in-out;
 }
 
-.root > header > a:hover {
+.root > header > a:hover,
+.root > header > button:hover {
   text-decoration: underline;
+}
+
+.root > header > button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-top: -0.5rem;
 }
 
 .root > header > h3 {
