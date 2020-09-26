@@ -14,8 +14,8 @@
   border-radius: 50%;
   grid-row: 1/3;
   margin: auto;
-  height: 15rem;
-  width: 15rem;
+  height: 25vh;
+  width: 25vh;
 }
 
 .root > h4 {
@@ -33,8 +33,6 @@
     display: block;
   }
   .root > figure {
-    height: 10rem;
     margin-bottom: 1rem;
-    width: 10rem;
   }
 }
