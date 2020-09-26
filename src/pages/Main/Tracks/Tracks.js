@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useFlash } from '../hooks';
 import { Context } from '../Main';
@@ -6,8 +6,13 @@ import styles from './styles.scoped.css';
 
 export default function Tracks() {
   const { term } = useContext(Context);
+  const [txtTerm, setTxtTerm] = useState(term);
   const { data, isMounting } = useSelector(s => s.main);
   const items = useFlash(data.tracks);
+
+  useEffect(() => {
+    setTxtTerm(term);
+  }, [items]);
 
   const setContent = v => {
     if (isMounting.tracks) {
@@ -24,7 +29,7 @@ export default function Tracks() {
   return (
     <section className={styles.root}>
       <header>
-        <h3>Your top tracks {term}</h3>
+        <h3>Your top tracks {txtTerm}</h3>
       </header>
       <ul>
         {setContent(items.map((i, idx) => (

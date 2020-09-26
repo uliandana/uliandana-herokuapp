@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useFlash } from '../hooks';
@@ -7,8 +7,13 @@ import styles from './styles.scoped.css';
 
 export default function Artists() {
   const { term } = useContext(Context);
+  const [txtTerm, setTxtTerm] = useState(term);
   const { data, isMounting } = useSelector(s => s.main);
   const items = useFlash(data.artists);
+
+  useEffect(() => {
+    setTxtTerm(term);
+  }, [items]);
 
   const setContent = v => {
     if (isMounting.artists) {
@@ -25,7 +30,7 @@ export default function Artists() {
   return (
     <section className={styles.root}>
       <header>
-        <h3>Your top artists {term}</h3>
+        <h3>Your top artists {txtTerm}</h3>
         <Link to="/main/artists">More &rarr;</Link>
       </header>
       <ul>
