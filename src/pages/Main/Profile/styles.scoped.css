@@ -4,9 +4,7 @@
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: 15rem 1fr;
-  margin-right: 2rem;
   overflow: hidden;
-  padding: 2rem;
 }
 
 .root > figure {
@@ -33,10 +31,6 @@
 @media only screen and (max-width: 48em) {
   .root {
     display: block;
-    grid-column: 1;
-    grid-row: 2;
-    margin: 1rem 0;
-    padding: 1rem;
   }
   .root > figure {
     height: 10rem;

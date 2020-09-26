@@ -2,7 +2,6 @@
   background-color: #fcfbfa;
   border-radius: 1rem;
   overflow: hidden;
-  padding: 1rem 2rem 2rem;
 }
 
 .root > header {
@@ -27,10 +26,16 @@
 }
 
 .root > ul {
+  animation: enter-sliding 1s ease-out forwards;
   display: grid;
   grid-auto-flow: column;
   grid-gap: 1rem;
   overflow-x: auto;
+}
+
+@keyframes enter-sliding {
+  from { margin-left: 10rem; }
+  to { margin-left: 0; }
 }
 
 .root > ul::-webkit-scrollbar {
@@ -98,12 +103,6 @@
 }
 
 @media only screen and (max-width: 48em) {
-  .root {
-    grid-column: 1;
-    grid-row: 3;
-    margin: 0 0 1rem;
-    padding: 1rem;
-  }
   .root > header > h3 {
     font-size: 1rem;
   }
