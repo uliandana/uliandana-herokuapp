@@ -44,7 +44,7 @@ export default function Artists() {
           <h3>Your top artists {txtTerm}</h3>
           {isArtistsPage
             ? <button onClick={goBack}>&times;</button>
-            : <Link to="/main/artists">More &rarr;</Link>}
+            : <Link to="/main/artists">&rarr;</Link>}
         </header>
         {Content}
       </section>
@@ -64,6 +64,8 @@ export function Mounting() {
 export function Generate() {
   const { items } = useContext(SubContext);
   const [dimension, setDimension] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [ratio, setRatio] = useState(false);
   const ref = useRef(null);
   const [height, width] = dimension;
 
@@ -73,6 +75,7 @@ export function Generate() {
     const { screen } = window;
     const isDesktop = screen.height < screen.width;
     const r = isDesktop ? clientHeight / 2436 : clientWidth / screen.width;
+    setRatio(r);
     setDimension(isDesktop ? [clientHeight, r * 1125] : [screen.height * r, clientWidth]);
 
     const base = document.querySelector('#app > main > section:nth-child(3)');
@@ -83,7 +86,7 @@ export function Generate() {
     return () => {
       base.removeAttribute('style');
     };
-  }, []);
+  }, [open]);
 
   const figStyle = (i, idx) => {
     const ctrSize = 0.3 * width;
@@ -143,8 +146,14 @@ export function Generate() {
     width: `${width}px`,
   };
 
+  const onClick = () => {
+    ref.current.style.transform = `scale(${open ? 1 : 1/ratio})`;
+    window.scrollTo(0, 0);
+    setOpen(!open);
+  };
+
   return (
-    <div ref={ref} style={style}>
+    <div className={open ? styles.fig : ''} onClick={onClick} ref={ref} style={style}>
       {items.map((i, idx) => (
         <figure key={idx} style={figStyle(i, idx)} />
       ))}
