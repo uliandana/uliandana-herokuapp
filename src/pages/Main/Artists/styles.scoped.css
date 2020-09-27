@@ -1,7 +1,24 @@
 .root {
   background-color: #fcfbfa;
   border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+}
+
+.root > div {
+  background-color: #E5CCB8;
+  flex: 1;
+  position: relative;
+}
+
+.root > div > figure {
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.25);
+  position: absolute;
 }
 
 .root > header {
