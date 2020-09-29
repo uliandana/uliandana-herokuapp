@@ -134,7 +134,7 @@ export function Generate() {
       },
     ];
     return {
-      backgroundImage: `url(${i.images[1].url})`,
+      backgroundImage: `url(${i.images[1]?.url})`,
       height: `${size}px`,
       width: `${size}px`,
       ...(pos[idx] || { display: 'none' }),
@@ -166,7 +166,7 @@ export function List() {
   return items.map((i, idx) => (
     <li key={idx}>
       <small>{idx + 1}</small>
-      <figure style={{ backgroundImage: `url(${i.images[1].url})` }} />
+      <figure style={{ backgroundImage: `url(${i.images[1]?.url})` }} />
       <h4>{i.name}</h4>
     </li>
   ));

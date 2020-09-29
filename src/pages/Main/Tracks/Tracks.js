@@ -35,9 +35,9 @@ export default function Tracks() {
         {setContent(items.map((i, idx) => (
           <li key={idx}>
             <small>{idx + 1}</small>
-            <figure style={{ backgroundImage: `url(${i.album.images[1].url})` }} />
+            <figure style={{ backgroundImage: `url(${i.album?.images[1]?.url})` }} />
             <h4>{i.name}</h4>
-            <p>{i.artists[0].name}</p>
+            <p>{i.artists[0]?.name}</p>
           </li>
         )))}
       </ul>

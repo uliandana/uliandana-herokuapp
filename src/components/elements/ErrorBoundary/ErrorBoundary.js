@@ -20,7 +20,10 @@ export default class ErrorBoundary extends React.Component {
     }
 
     return (
-      <h1>Error</h1>
+      <>
+        <h1>Error</h1>
+        <details>{error.message}</details>
+      </>
     );
   }
 }
