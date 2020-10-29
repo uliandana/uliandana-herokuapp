@@ -27,7 +27,7 @@ webpack(config).run((error, stats) => {
 
   if (jsonStats.warnings.length > 0) {
     console.log(chalkWarning('Files generated with warnings: '));
-    jsonStats.warnings.map(warning => console.log(chalkWarning(warning)));
+    jsonStats.warnings.map(warning => console.log(chalkWarning(warning?.message || warning)));
   }
 
   console.log(chalkSuccess(`Build files using ${mode} mode are ready at /dist!`));

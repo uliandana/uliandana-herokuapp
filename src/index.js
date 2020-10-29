@@ -1,6 +1,6 @@
 import React from 'react';
+import 'fontsource-ubuntu/latin.css';
 import { render } from 'react-dom';
-import 'typeface-ubuntu';
 import configureStore, { history } from './store/configureStore';
 import App from './App';
 import './App.css';
@@ -19,7 +19,7 @@ export function moduleHotAccept(mod) {
     mod.hot.accept('./App', () => {
       const NewApp = require('./App').default;
       render(
-        <NewApp history={history} store={store} />,
+        NewApp({ history, store }),
         document.getElementById('app')
       );
     });

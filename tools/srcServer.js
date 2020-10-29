@@ -13,10 +13,7 @@ const port = 4000;
 
 app.use(historyApiFallback());
 app.use(webpackDevMiddleware(bundler, {
-  noInfo: true,
   publicPath: config.output.publicPath,
-  quiet: true,
-  stats: "minimal",
 }));
 app.use(webpackHotMiddleware(bundler));
 app.use(express.static(path.join(__dirname, '../src')));

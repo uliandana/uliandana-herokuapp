@@ -83,40 +83,48 @@ export const ottfProd = {
 export const postCssDev = {
   loader: 'postcss-loader',
   options: {
-    plugins: () => [
-      require('autoprefixer')
-    ],
-    sourceMap: true
-  }
+    postcssOptions: {
+      plugins: [
+        require('autoprefixer'),
+      ],
+    },
+    sourceMap: true,
+  },
 };
 
 export const postCssProd = {
   loader: 'postcss-loader',
   options: {
-    plugins: () => [
-      require('autoprefixer')
-    ],
-    sourceMap: true
+    postcssOptions: {
+      plugins: [
+        require('autoprefixer'),
+      ],
+    },
+    sourceMap: true,
   }
 };
 
 export const postCssModuleDev = {
   loader: 'postcss-loader',
   options: {
-    plugins: () => [
-      require('autoprefixer')
-    ],
-    sourceMap: true
+    postcssOptions: {
+      plugins: [
+        require('autoprefixer'),
+      ],
+    },
+    sourceMap: true,
   }
 };
 
 export const postCssModuleProd = {
   loader: 'postcss-loader',
   options: {
-    plugins: () => [
-      require('autoprefixer')
-    ],
-    sourceMap: true
+    postcssOptions: {
+      plugins: [
+        require('autoprefixer'),
+      ],
+    },
+    sourceMap: true,
   }
 };
 
