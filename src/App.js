@@ -14,11 +14,11 @@ if (!('scrollBehavior' in document.documentElement.style)) {
 }
 
 const App = ({ history, store }) => {
-  const { hash, pathname, reload } = location;
+  const { hash, pathname } = location;
   const isLoggedIn = !!getToken();
   if (isLoggedIn && checkExpireTime()) {
     clearStorages();
-    reload();
+    location.reload();
     return null;
   }
 

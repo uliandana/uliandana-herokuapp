@@ -1,25 +1,19 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { useFlash } from '../hooks';
 import { Context } from '../Main';
 import styles from './styles.scoped.css';
 
 const SubContext = createContext({});
 
 export default function Artists() {
-  const { term } = useContext(Context);
+  const { btns, term } = useContext(Context);
   const { goBack } = useHistory();
   const { page } = useParams();
   const [Content, setContent] = useState(null);
-  const [txtTerm, setTxtTerm] = useState(term);
   const { data, isMounting } = useSelector(s => s.main);
-  const items = useFlash(data.artists);
+  const items = data?.artists?.[term] || [];
   const isArtistsPage = page === 'artists';
-
-  useEffect(() => {
-    setTxtTerm(term);
-  }, [items]);
 
   useEffect(() => {
     setContent(null);
@@ -41,7 +35,7 @@ export default function Artists() {
     <SubContext.Provider value={{ items }}>
       <section className={styles.root}>
         <header>
-          <h3>Your top artists {txtTerm}</h3>
+          <h3>Your top artists {btns.find(i => i.term === term).text.toLowerCase()}</h3>
           {isArtistsPage
             ? <button onClick={goBack}>&times;</button>
             : <Link to="/main/artists">&rarr;</Link>}

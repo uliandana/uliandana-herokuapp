@@ -1,4 +1,4 @@
-import { FETCHED, LOADING, MOUNTING } from './constants';
+import { PROFILE_FETCHED, TERM_FETCHED, LOADING, MOUNTING } from './constants';
 
 const initialState = {
   isLoading: false,
@@ -8,22 +8,32 @@ const initialState = {
     tracks: true,
   },
   data: {
-    artists: [],
+    artists: {},
     profile: {},
-    tracks: [],
+    tracks: {},
   },
 };
 
 export default function reducer(state = initialState, action = {}) {
-  const { type, data, isLoading, isMounting, key } = action;
+  const { type, data, isLoading, isMounting, key, term } = action;
 
   switch (type) {
-    case FETCHED:
+    case PROFILE_FETCHED:
+      return {
+        ...state,
+        isLoading: false,
+        isMounting: { ...state.isMounting, profile: false },
+        data: { ...state.data, profile: data },
+      };
+    case TERM_FETCHED:
       return {
         ...state,
         isLoading: false,
         isMounting: { ...state.isMounting, [key]: false },
-        data: { ...state.data, [key]: data },
+        data: {
+          ...state.data,
+          [key]: { ...state.data[key], [term]: data },
+        },
       };
     case LOADING:
       return {

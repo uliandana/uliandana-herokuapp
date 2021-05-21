@@ -13,6 +13,7 @@ const buildMode = process.argv[2] || '';
 const GLOBALS = {
   NODE_ENV: JSON.stringify('production'),
   MODE: buildMode.replace('--', ''),
+  API_URL: 'https://api.spotify.com',
 };
 
 export default {

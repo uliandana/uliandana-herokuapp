@@ -1,18 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { useFlash } from '../hooks';
 import { Context } from '../Main';
 import styles from './styles.scoped.css';
 
 export default function Tracks() {
-  const { term } = useContext(Context);
-  const [txtTerm, setTxtTerm] = useState(term);
+  const { btns, term } = useContext(Context);
   const { data, isMounting } = useSelector(s => s.main);
-  const items = useFlash(data.tracks);
-
-  useEffect(() => {
-    setTxtTerm(term);
-  }, [items]);
+  const items = data?.tracks?.[term] || [];
 
   const setContent = v => {
     if (isMounting.tracks) {
@@ -29,7 +23,7 @@ export default function Tracks() {
   return (
     <section className={styles.root}>
       <header>
-        <h3>Your top tracks {txtTerm}</h3>
+        <h3>Your top tracks {btns.find(i => i.term === term).text.toLowerCase()}</h3>
       </header>
       <ul>
         {setContent(items.map((i, idx) => (

@@ -19,14 +19,9 @@ export default function Main() {
   const { profile } = data;
 
   useEffect(() => {
-    dispatch(fetchData('artists', term));
-    dispatch(fetchData('tracks', term));
-    dispatch(fetchData('profile'));
-  }, []);
-
-  useEffect(() => {
-    dispatch(fetchData('artists', term, true));
-    dispatch(fetchData('tracks', term, true));
+    (!data?.artists?.[term]?.length) && dispatch(fetchData('artists', term, true));
+    (!data?.tracks?.[term]?.length) && dispatch(fetchData('tracks', term, true));
+    (!data?.profile?.display_name) && dispatch(fetchData('profile'));
   }, [term]);
 
   if (isMounting.profile) {
@@ -49,7 +44,8 @@ export default function Main() {
   ].filter(Boolean).join(' ');
 
   const contextValue = {
-    term: btns.find(i => i.term === term).text.toLowerCase(),
+    btns,
+    term,
   };
 
   return (

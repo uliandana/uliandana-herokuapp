@@ -1,0 +1,20 @@
+0 - 1
+0: "danceability"
+1: "energy"
+5: "speechiness"
+6: "acousticness"
+7: "instrumentalness"
+8: "liveness"
+9: "valence"
+
+-60 - 0
+3: "loudness"
+
+Vary
+10: "tempo"
+11: "duration_ms"
+
+Other
+2: "key"
+4: "mode"
+12: "time_signature"

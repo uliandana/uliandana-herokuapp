@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { getToken } from './storage';
 
-export const BASIC_AUTH = {
-  'Authorization': 'Basic _',
-};
 export const BEARER_AUTH = {
   'Authorization': `Bearer ${getToken()}`,
 };
@@ -28,18 +25,4 @@ export default function fetch(url, method, param1, param2) {
         }
       });
   });
-}
-
-export function getUrl(urls) {
-  const mode = process.env.MODE;
-
-  if (mode === 'production') {
-    return urls[0];
-  }
-
-  if (mode === 'staging') {
-    return urls[1];
-  }
-
-  return urls[2];
 }

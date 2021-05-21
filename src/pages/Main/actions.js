@@ -1,5 +1,5 @@
 import { getMe, getPersonalization } from '../../services';
-import { FETCHED, LOADING, MOUNTING } from './constants';
+import { PROFILE_FETCHED, TERM_FETCHED, LOADING, MOUNTING } from './constants';
 
 export function fetchData(type, term, hasMounted) {
   const key = type;
@@ -14,15 +14,19 @@ export function fetchData(type, term, hasMounted) {
       ];
       const api = isProfile ? () => getMe() : () => getPersonalization(type, query.join('&'));
       const data = await api();
-      dispatch(fetchedAction(isProfile ? data : data.items, key));
+      dispatch(isProfile ? profileFetchedAction(data) : termFetchedAction(data?.items, key, term));
     } catch (err) {
       dispatch(loadAction(false, key));
     }
   };
 }
 
-function fetchedAction(data, key) {
-  return { type: FETCHED, data, key };
+function profileFetchedAction(data) {
+  return { type: PROFILE_FETCHED, data };
+}
+
+function termFetchedAction(data, key, term) {
+  return { type: TERM_FETCHED, data, key, term };
 }
 
 function loadingAction(isLoading) {

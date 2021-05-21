@@ -27,7 +27,10 @@ export default {
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.EnvironmentPlugin({ MODE: 'development' }),
+    new webpack.EnvironmentPlugin({
+      API_URL: 'https://api.spotify.com',
+      MODE: 'development',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({     // Create HTML file that includes references to bundled CSS and JS.
