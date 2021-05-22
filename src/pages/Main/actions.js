@@ -10,7 +10,7 @@ export function fetchData(type, term, hasMounted) {
     dispatch(loadAction(true, key));
     try {
       const query = [
-        `?time_range=${term}`,
+        `?time_range=${term}&limit=24`,
       ];
       const api = isProfile ? () => getMe() : () => getPersonalization(type, query.join('&'));
       const data = await api();

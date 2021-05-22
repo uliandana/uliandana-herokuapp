@@ -1,11 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import ProgressLoading from '../../components/elements/ProgressLoading';
 import Spinner from '../../components/elements/Spinner';
 import Artists from './Artists';
 import Profile from './Profile';
-import Tracks from './Tracks';
 import { fetchData } from './actions';
 import styles from './styles.scoped.css';
 
@@ -13,10 +11,9 @@ export const Context = createContext({});
 
 export default function Main() {
   const dispatch = useDispatch();
-  const { page } = useParams();
   const [term, setTerm] = useState('short_term');
   const { data, isLoading, isMounting } = useSelector(s => s.main);
-  const { profile } = data;
+  const [overlay, setOverlay] = useState(true);
 
   useEffect(() => {
     (!data?.artists?.[term]?.length) && dispatch(fetchData('artists', term, true));
@@ -38,30 +35,17 @@ export default function Main() {
     { text: 'All Time', term: 'long_term' },
   ];
 
-  const mainClass = [
-    styles.root,
-    (page === 'artists') && styles['root-artists'],
-  ].filter(Boolean).join(' ');
-
   const contextValue = {
     btns,
-    term,
+    term, setTerm,
+    overlay, setOverlay,
   };
 
   return (
     <Context.Provider value={contextValue}>
-      <main className={mainClass}>
-        <header>
-          <h1>Welcome, {profile?.display_name}!</h1>
-          <nav>
-            {btns.map(i => (
-              <button disabled={i.term === term} key={i.term} onClick={() => setTerm(i.term)}>{i.text}</button>
-            ))}
-          </nav>
-        </header>
+      <main className={styles.root}>
         <Profile />
         <Artists />
-        <Tracks />
       </main>
       <ProgressLoading isLoading={isLoading} />
     </Context.Provider>

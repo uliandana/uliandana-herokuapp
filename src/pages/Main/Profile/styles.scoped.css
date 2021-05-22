@@ -1,10 +1,23 @@
 .root {
+  align-items: center;
   background-color: #fcfbfa;
-  border-radius: 1rem;
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 15rem 1fr;
-  overflow: hidden;
+  border-radius: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1.2rem 2.3rem, rgba(0, 0, 0, 0.22) 0 0.9rem 0.75rem;
+  display: flex;
+  left: 50%;
+  opacity: 1;
+  padding: 0.5rem;
+  position: fixed;
+  top: 1rem;
+  transform: translateX(-50%);
+  transition: all 0.25s ease-in-out;
+  visibility: visible;
+  z-index: 2;
+}
+
+.root.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .root > figure {
@@ -12,27 +25,36 @@
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
-  grid-row: 1/3;
-  margin: auto;
-  height: 25vh;
-  width: 25vh;
-}
-
-.root > h4 {
-  font-size: 1.5rem;
-  margin: auto 1rem 0;
+  height: 3rem;
+  margin-right: 1rem;
+  width: 3rem;
 }
 
 .root > p {
   font-size: 1rem;
-  margin: 0 1rem;
+}
+
+.root > select {
+  border: 0.0625rem solid #131045;
+  border-radius: 2rem;
+  color: #131045;
+  margin: 0 0.5rem 0 1rem;
+  padding: 0.25rem;
 }
 
 @media only screen and (max-width: 48em) {
   .root {
-    display: block;
+    padding: 0.25rem;
   }
   .root > figure {
-    margin-bottom: 1rem;
+    height: 2rem;
+    width: 2rem;
+  }
+  .root > p {
+    display: none;
+  }
+  .root > select {
+    height: 2rem;
+    margin-right: 0;
   }
 }
