@@ -35,8 +35,10 @@
 }
 
 .root > select {
+  background: transparent;
   border: 0.0625rem solid #131045;
   border-radius: 2rem;
+  box-shadow: none;
   color: #131045;
   margin: 0 0.5rem 0 1rem;
   padding: 0.25rem;
