@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ProgressLoading from '../../components/elements/ProgressLoading';
 import Spinner from '../../components/elements/Spinner';
 import Artists from './Artists';
+import Tracks from './Tracks';
 import Profile from './Profile';
 import { fetchData } from './actions';
 import styles from './styles.scoped.css';
@@ -12,8 +13,9 @@ export const Context = createContext({});
 
 export default function Main() {
   const dispatch = useDispatch();
+  const { page } = useParams();
   const { data, isLoading, isMounting } = useSelector(s => s.main);
-  const [nav, setNav] = useState(true);
+  const [nav, setNav] = useState(false);
   const [overlay, setOverlay] = useState(true);
   const [term, setTerm] = useState('short_term');
 
@@ -47,11 +49,20 @@ export default function Main() {
     <Context.Provider value={contextValue}>
       <main className={styles.root}>
         <Profile />
-        <Artists />
+        {(p => {
+          switch(p) {
+            case 'tracks':
+              return <Tracks />;
+            case 'stats':
+              return <div />;
+            default:
+              return <Artists />;
+          }
+        })(page)}
         <nav className={(overlay && nav) ? '' : styles.hidden}>
-          <Link to="/">Artists</Link>
-          <Link to="/tracks">Tracks</Link>
-          <Link to="/stats">Stats</Link>
+          <Link to="/main/">Artists</Link>
+          <Link to="/main/tracks">Tracks</Link>
+          <Link to="/main/stats">Stats</Link>
         </nav>
         <button className={overlay ? '' : styles.hidden} onClick={() => setNav(!nav)}>☰</button>
       </main>
