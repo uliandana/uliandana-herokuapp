@@ -9,8 +9,9 @@ const initialState = {
   },
   data: {
     artists: {},
-    profile: {},
+    features: {},
     genres: [],
+    profile: {},
     tracks: {},
   },
 };

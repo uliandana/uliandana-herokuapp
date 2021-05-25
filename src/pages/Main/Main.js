@@ -7,7 +7,7 @@ import Artists from './Artists';
 import Profile from './Profile';
 import Stats from './Stats';
 import Tracks from './Tracks';
-import { fetchData } from './actions';
+import { fetchData, fetchProfile } from './actions';
 import styles from './styles.scoped.css';
 
 export const Context = createContext({});
@@ -23,7 +23,7 @@ export default function Main() {
   useEffect(() => {
     (!data?.artists?.[term]?.length) && dispatch(fetchData('artists', term, true));
     (!data?.tracks?.[term]?.length) && dispatch(fetchData('tracks', term, true));
-    (!data?.profile?.display_name) && dispatch(fetchData('profile'));
+    (!data?.profile?.display_name) && dispatch(fetchProfile());
   }, [term]);
 
   if (isMounting.profile) {
