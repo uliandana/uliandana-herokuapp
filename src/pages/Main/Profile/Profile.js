@@ -10,9 +10,11 @@ export default function Profile() {
     <section className={[styles.root, !overlay && styles.hidden].filter(Boolean).join(' ')}>
       <figure style={{ backgroundImage: `url(${profile?.images[0]?.url})` }} />
       <p>{profile?.display_name} • {profile?.followers?.total} followers</p>
-      <select onChange={e => setTerm(e.target.value)} value={term}>
-        {btns.map(i => <option key={i.term} value={i.term}>{i.text}</option>)}
-      </select>
+      <label>
+        <select onChange={e => setTerm(e.target.value)} value={term}>
+          {btns.map(i => <option key={i.term} value={i.term}>{i.text}</option>)}
+        </select>
+      </label>
     </section>
   );
 }

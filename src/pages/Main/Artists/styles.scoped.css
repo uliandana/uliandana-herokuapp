@@ -3,7 +3,7 @@
 }
 
 .root > header {
-  background-image: linear-gradient(to top, rgba(126, 106, 128, 0.5), transparent);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
   left: 0;
   height: 100%;
   opacity: 1;
@@ -75,7 +75,7 @@
 }
 
 .root > header.hidden ~ ul > li::after {
-  background-image: linear-gradient(to top, rgba(126, 106, 128, 0.5), transparent);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
   bottom: 0;
   content: '';
   height: 50%;
@@ -101,7 +101,7 @@
 
 @media only screen and (max-width: 48em) {
   .root > header {
-    background-image: linear-gradient(to top, rgba(126, 106, 128, 0.3), transparent);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
     height: 100vh;
     position: fixed;
   }

@@ -34,13 +34,28 @@
   font-size: 1rem;
 }
 
-.root > select {
+.root > label {
+  align-items: center;
+  display: flex;
+  margin: 0 0.5rem 0 1rem;
+  position: relative;
+}
+
+.root > label::after {
+  color: #131045;
+  content: '▼';
+  font-size: 0.7rem;
+  margin-left: 0.25rem;
+}
+
+.root > label > select {
+  appearance: none;
   background: transparent;
-  border: 0.0625rem solid #131045;
-  border-radius: 2rem;
+  border: none;
   box-shadow: none;
   color: #131045;
-  margin: 0 0.5rem 0 1rem;
+  font-size: 1rem;
+  outline: none;
   padding: 0.25rem;
 }
 
@@ -50,13 +65,17 @@
   }
   .root > figure {
     height: 2rem;
+    margin-right: 0.25rem;
     width: 2rem;
   }
   .root > p {
     display: none;
   }
-  .root > select {
+  .root > label {
+    margin: 0 0.25rem;
+  }
+  .root > label > select {
+    font-size: 0.8rem;
     height: 2rem;
-    margin-right: 0;
   }
 }

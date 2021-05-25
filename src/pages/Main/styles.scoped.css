@@ -7,6 +7,68 @@
   transition: all 0.5s ease-out;
 }
 
+.root > button {
+  background-color: #fcfbfa;
+  border: none;
+  border-radius: 50%;
+  bottom: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1.2rem 2.3rem, rgba(0, 0, 0, 0.22) 0 0.9rem 0.75rem;
+  color: #131045;
+  cursor: pointer;
+  display: block;
+  font-size: 1.5rem;
+  height: 3rem;
+  opacity: 1;
+  position: fixed;
+  transition: all 0.25s ease-in-out;
+  right: 1rem;
+  visibility: visible;
+  width: 3rem;
+  z-index: 2;
+}
+
+.root > button.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.root > nav {
+  align-items: flex-end;
+  bottom: 9rem;
+  display: flex;
+  flex-direction: column;
+  height: 3rem;
+  opacity: 1;
+  position: fixed;
+  transition: all 0.25s ease-in-out;
+  right: 1rem;
+  visibility: visible;
+  z-index: 2;
+}
+
+.root > nav.hidden {
+  bottom: 2rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.root > nav > a {
+  background-color: #fcfbfa;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1.2rem 2.3rem, rgba(0, 0, 0, 0.22) 0 0.9rem 0.75rem;
+  color: #131045;
+  margin-bottom: 1rem;
+  padding: 0.25rem 1.5rem;
+  transition: all 0.15s ease-in-out;
+  text-align: right;
+}
+
+.root > nav.hidden > a {
+  margin-bottom: 0;
+  transform: scaleX(0);
+  transform-origin: 80% bottom;
+}
+
 .spinner {
   align-items: center;
   display: flex;
