@@ -4,8 +4,9 @@ import { Link, useParams } from 'react-router-dom';
 import ProgressLoading from '../../components/elements/ProgressLoading';
 import Spinner from '../../components/elements/Spinner';
 import Artists from './Artists';
-import Tracks from './Tracks';
 import Profile from './Profile';
+import Stats from './Stats';
+import Tracks from './Tracks';
 import { fetchData } from './actions';
 import styles from './styles.scoped.css';
 
@@ -54,7 +55,7 @@ export default function Main() {
             case 'tracks':
               return <Tracks />;
             case 'stats':
-              return <div />;
+              return <Stats />;
             default:
               return <Artists />;
           }

@@ -10,6 +10,7 @@ const initialState = {
   data: {
     artists: {},
     profile: {},
+    genres: [],
     tracks: {},
   },
 };

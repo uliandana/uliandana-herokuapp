@@ -1,0 +1,84 @@
+.root {
+  position: relative;
+}
+
+.genres {
+  background-color: #fcfbfa;
+  border-radius: 1rem;
+  color: #131045;
+  display: grid;
+  margin: 4.5rem 0.5rem 1rem 0.5rem;
+  padding: 1rem 0.5rem;
+  grid-template-columns: auto 1fr;
+}
+
+.genres > h3 {
+  grid-column: 1/3;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.genres > svg {
+  grid-column: 1;
+  margin: auto 0;
+}
+
+.genres > ul {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 2;
+  margin: auto 0 auto 1rem;
+}
+
+.genres > ul > li {
+  border-radius: 0.25rem;
+  color: #fcfbfa;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+  margin-right: 0.25rem;
+  padding: 0.25rem;
+}
+
+.genres > details {
+  border-top: 0.0625rem solid #E5CCB8;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  grid-column: 1/3;
+}
+
+.genres > details > summary {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem 0;
+}
+
+.genres > details > summary::after {
+  color: #131045;
+  content: '▼';
+  font-size: 0.7rem;
+  margin-left: 0.25rem;
+}
+
+.genres > details > ul > li {
+  padding: 0.5rem;
+  border-bottom: 0.0625rem solid #E5CCB8;
+}
+
+.genres > details > ul > li:last-of-type {
+  border-bottom: none;
+}
+
+.genres > details > ul > li > header {
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+@media only screen and (max-width: 48em) {
+  .root > header {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+    height: 100vh;
+    position: fixed;
+  }
+}
