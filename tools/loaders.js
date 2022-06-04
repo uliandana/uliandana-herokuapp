@@ -5,7 +5,7 @@ export const cssDev = {
   options: {
     modules: false,
     sourceMap: true,
-    url: (url) => url.charAt(0) === '.',
+    url: { filter: (url) => url.charAt(0) === '.' },
   }
 };
 
@@ -14,7 +14,7 @@ export const cssProd = {
   options: {
     modules: false,
     sourceMap: true,
-    url: (url) => url.charAt(0) === '.',
+    url: { filter: (url) => url.charAt(0) === '.' },
   }
 };
 
@@ -29,7 +29,7 @@ export const cssModuleDev = {
       },
     },
     sourceMap: true,
-    url: (url) => url.charAt(0) === '.',
+    url: { filter: (url) => url.charAt(0) === '.' },
   }
 };
 
@@ -38,45 +38,7 @@ export const cssModuleProd = {
   options: {
     modules: true,
     sourceMap: true,
-    url: (url) => url.charAt(0) === '.',
-  }
-};
-
-export const eotProd = {
-  loader: 'url-loader',
-  options: {
-    name: '[name].[ext]'
-  }
-};
-
-export const imageDev = {
-  loader: 'file-loader',
-  options: {
-    name: '[name].[ext]'
-  }
-};
-
-export const imageProd = {
-  loader: 'file-loader',
-  options: {
-    name: '[name].[ext]'
-  }
-};
-
-export const ottfDev = {
-  loader: 'url-loader',
-  options: {
-    limit: 10000,
-    mimetype: 'application/octet-stream'
-  }
-};
-
-export const ottfProd = {
-  loader: 'url-loader',
-  options: {
-    limit: 10000,
-    mimetype: 'application/octet-stream',
-    name: '[name].[ext]'
+    url: { filter: (url) => url.charAt(0) === '.' },
   }
 };
 
@@ -125,39 +87,5 @@ export const postCssModuleProd = {
       ],
     },
     sourceMap: true,
-  }
-};
-
-export const svgDev = {
-  loader: 'url-loader',
-  options: {
-    limit: 10000,
-    mimetype: 'image/svg+xml'
-  }
-};
-
-export const svgProd = {
-  loader: 'url-loader',
-  options: {
-    limit: 10000,
-    mimetype: 'image/svg+xml',
-    name: '[name].[ext]'
-  }
-};
-
-export const woffDev = {
-  loader: 'url-loader',
-  options: {
-    limit: 10000,
-    mimetype: 'application/font-woff'
-  }
-};
-
-export const woffProd = {
-  loader: 'url-loader',
-  options: {
-    limit: 10000,
-    mimetype: 'application/font-woff',
-    name: '[name].[ext]'
   }
 };

@@ -64,7 +64,7 @@ function mapGenreStats(data) {
       }
     });
     return acc;
-  }, []).sort(sort);
+  }, []).sort(sort).slice(0, 20);
 
   const total = items.reduce((acc, i) => acc + i.total, 0);
 

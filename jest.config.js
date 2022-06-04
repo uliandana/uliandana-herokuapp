@@ -5,7 +5,6 @@ module.exports = {
   },
   setupFiles: [
     "raf/polyfill",
-    "./tools/enzymeTestAdapterSetup.js"
   ],
   collectCoverageFrom: [
     "src/**/*.js",

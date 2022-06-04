@@ -9,8 +9,6 @@ const Suspensed = (Element) => function suspense(props) {
   );
 };
 
-export default {
-  Error404: Suspensed(lazy(() => import('./Error404'))),
-  Login: Suspensed(lazy(() => import('./Login'))),
-  Main: Suspensed(lazy(() => import('./Main'))),
-};
+export const Error404 = Suspensed(lazy(() => import('./Error404')));
+export const Main = Suspensed(lazy(() => import('./Main')));
+export const Login = Suspensed(lazy(() => import('./Login')));

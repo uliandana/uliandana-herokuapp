@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader/root';
-import { Router } from 'react-router';
-import { Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ErrorBoundary from './components/elements/ErrorBoundary';
-import pages from './pages';
+import { Error404, Main, Login } from './pages';
 import { checkExpireTime, clearStorages, getToken, setExpireTime, setToken } from './utils/storage';
 import ContextProvider from './contexts';
 
@@ -13,7 +12,7 @@ if (!('scrollBehavior' in document.documentElement.style)) {
   import('scroll-behavior-polyfill');
 }
 
-const App = ({ history, store }) => {
+const App = ({ store }) => {
   const { hash, pathname } = location;
   const isLoggedIn = !!getToken();
   if (isLoggedIn && checkExpireTime()) {
@@ -24,7 +23,7 @@ const App = ({ history, store }) => {
 
   if (hash) {
     const { access_token, expires_in } = hash.split('&').reduce((acc, i) => {
-      const [k, v] = i.replace('#','').split('=');
+      const [k, v] = i.replace('#', '').split('=');
       return { ...acc, [k]: v };
     }, {});
     setToken(access_token);
@@ -45,17 +44,18 @@ const App = ({ history, store }) => {
 
   return (
     <Provider store={store}>
-      <Router history={history}>
+      <BrowserRouter>
         <ErrorBoundary>
           <ContextProvider>
-            <Switch>
-              <Route component={pages.Main} exact path={['/main', '/main/:page']} />
-              <Route component={pages.Login} exact path="/" />
-              <Route component={pages.Error404} />
-            </Switch>
+            <Routes>
+              <Route element={<Main />} exact path="/main/:page" />
+              <Route element={<Main />} exact path="/main" />
+              <Route element={<Login />} exact path="/" />
+              <Route element={<Error404 />} />
+            </Routes>
           </ContextProvider>
         </ErrorBoundary>
-      </Router>
+      </BrowserRouter>
     </Provider>
   );
 };
@@ -63,6 +63,5 @@ const App = ({ history, store }) => {
 export default hot(App);
 
 App.propTypes = {
-  history: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
 };

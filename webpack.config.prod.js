@@ -5,7 +5,6 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
-import MomentLocalesPlugin from 'moment-locales-webpack-plugin';
 import path from 'path';
 import * as loaders from './tools/loaders';
 
@@ -20,14 +19,16 @@ export default {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
-  devtool: 'source-map', // more info:https://webpack.js.org/guides/production/#source-mapping and https://webpack.js.org/configuration/devtool/
-  entry: path.resolve(__dirname, 'src/index'),
+  devtool: false,
+  entry: {
+    main: path.resolve(__dirname, 'src/index'),
+  },
   target: 'web',
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[chunkhash].js',
   },
   plugins: [
     // Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
@@ -64,12 +65,8 @@ export default {
     // Copy assets directory
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'src/assets', to: 'assets' }
+        { from: 'src/assets', to: 'assets' },
       ],
-    }),
-
-    new MomentLocalesPlugin({
-      localesToKeep: ['id'],
     }),
 
     new CompressionPlugin({
@@ -85,24 +82,8 @@ export default {
         use: ['babel-loader'],
       },
       {
-        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        use: [loaders.eotProd],
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [loaders.woffProd],
-      },
-      {
-        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        use: [loaders.ottfProd],
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: [loaders.svgProd],
-      },
-      {
-        test: /\.(jpe?g|png|gif|ico)$/i,
-        use: [loaders.imageProd],
+        test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+        type: 'asset/resource',
       },
       {
         oneOf: [

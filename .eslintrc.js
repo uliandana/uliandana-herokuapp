@@ -9,7 +9,7 @@ module.exports = {
     "react",
     "sonarjs"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -22,7 +22,8 @@ module.exports = {
     "browser": true,
     "node": true,
     "jquery": true,
-    "jest": true
+    "jest": true,
+    "worker": true
   },
   "rules": {
     "curly": 2,

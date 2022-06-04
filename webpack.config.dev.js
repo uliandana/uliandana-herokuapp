@@ -11,20 +11,22 @@ export default {
     extensions: ['*', '.js', '.jsx', '.json']
   },
   devtool: 'eval-cheap-module-source-map', // more info:https://webpack.js.org/guides/development/#using-source-maps and https://webpack.js.org/configuration/devtool/
-  entry: [
-    // must be first entry to properly set public path
-    './tools/webpack-public-path',
-    'react-hot-loader/patch',
-    'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, 'src/index.js') // Defining path seems necessary for this to work consistently on Windows machines.
-  ],
+  entry: {
+    main: [
+      // must be first entry to properly set public path
+      './tools/webpack-public-path',
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client?reload=true',
+      path.resolve(__dirname, 'src/index.js'), // Defining path seems necessary for this to work consistently on Windows machines.
+    ],
+  },
   stats: 'minimal',
   target: 'web',
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: (pathData) => pathData.chunk.name === 'main' ? 'bundle.js' : '[name].js',
   },
   plugins: [
     new webpack.EnvironmentPlugin({
@@ -50,24 +52,8 @@ export default {
         use: ['babel-loader'],
       },
       {
-        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        use: ['file-loader'],
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [loaders.woffDev],
-      },
-      {
-        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        use: [loaders.ottfDev],
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: [loaders.svgDev],
-      },
-      {
-        test: /\.(jpe?g|png|gif|ico)$/i,
-        use: [loaders.imageDev],
+        test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+        type: 'asset/resource',
       },
       {
         oneOf: [

@@ -86,8 +86,8 @@ export function Notif({ notif, setNotif }) {
   }, [notif]);
 
   useEffect(() => {
-    state.notif && setNotif(state.notif);
-  }, [state.notif]);
+    state?.notif && setNotif(state?.notif);
+  }, [state?.notif]);
 
   return (
     <div className="notif"

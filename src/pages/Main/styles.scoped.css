@@ -39,7 +39,7 @@
 
 .root > nav {
   align-items: flex-end;
-  bottom: 9rem;
+  bottom: 12rem;
   display: flex;
   flex-direction: column;
   height: 3rem;
