@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Source code of custom Spotify App web",
   "engines": {
-    "npm": ">=3"
+    "npm": "7"
   },
   "scripts": {
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
