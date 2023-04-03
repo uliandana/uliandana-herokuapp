@@ -2,6 +2,9 @@
   "name": "spotify-web",
   "version": "0.1.0",
   "description": "Source code of custom Spotify App web",
+  "engines": {
+    "npm": ">=7"
+  },
   "scripts": {
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
     "build": "babel-node tools/build.js",
